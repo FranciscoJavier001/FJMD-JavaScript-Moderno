@@ -1,6 +1,6 @@
 let a = 5;
 
-if (a < 10) {
+if (a <= 10) {
     console.log('A es menor a 10');
 }
 
