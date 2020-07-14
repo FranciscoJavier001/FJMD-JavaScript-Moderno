@@ -15,16 +15,16 @@ console.log({ dia });
 
 if (dia === 0) {
     console.log('Domingo');
-} else if (dia === 1 {
-        console.log('Lunes');
+} else if (dia === 1) {
+    console.log('Lunes');
 
-        // if (dia === 1) {
-        //     console.log('Lunes');
-        // } else {
-        //     console.log('No es lunes ni domingo');
-        // }
-    } else if (dia === 2) {
-        console.log('Martes');
-    } else {
-        console.log('No es lunes, martes o domingo');
-    }
+    // if (dia === 1) {
+    //     console.log('Lunes');
+    // } else {
+    //     console.log('No es lunes ni domingo');
+    // }
+} else if (dia === 2) {
+    console.log('Martes');
+} else {
+    console.log('No es lunes, martes o domingo');
+}
