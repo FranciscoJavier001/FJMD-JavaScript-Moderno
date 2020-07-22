@@ -7,10 +7,20 @@
 
 let deck = [];
 const tipos = ['C', 'D', 'H', 'S'];
-const especiales = ['A', 'K', 'Q', 'J'];
+const especiales = ['A', 'J', 'Q', 'K'];
+
+let puntosJugador = 0,
+    puntosComputadora = 0;
+
+// Referencias del HTML
+const btnPedir = document.querySelector('#btnPedir');
+
+const divCartasJugador = document.querySelector('#jugador-cartas');
+const puntosHTML = document.querySelectorAll('small');
 
 // Esta funcion crea un nuevo deck
 const crearDeck = () => {
+
     for (let i = 2; i <= 10; i++) {
         for (let tipo of tipos) {
             deck.push(i + tipo);
@@ -38,10 +48,7 @@ const pedirCarta = () => {
     }
 
     const carta = deck.pop()
-
-    console.log(deck);
-    console.log(carta); // Carta debe de ser de la baraja
-    return 'carta';
+    return carta;
 }
 
 // pedirCarta();
@@ -53,5 +60,26 @@ const valorCarta = (carta) => {
         valor * 1;
 }
 
-const valor = valorCarta(pedirCarta());
-console.log({ valor });
+// Eventos
+btnPedir.addEventListener('click', () => {
+    const carta = pedirCarta();
+
+    puntosJugador = puntosJugador + valorCarta(carta);
+    puntosHTML[0].innerText = puntosJugador;
+
+    // <!-- <img class="carta" src="assets/cartas/2S.png" alt="" srcset=""> -->
+    const imgCarta = document.createElement('img');
+    imgCarta.src = `assets/cartas/${carta}.png`; //3H, JD
+    imgCarta.classList.add('carta');
+    divCartasJugador.append(imgCarta);
+
+    if (puntosJugador > 21) {
+        console.warn('Lo siento mucho, perdiste');
+        btnPedir.disabled = true;
+    } else if (puntosJugador === 21) {
+        console.warn('21, Genial!');
+    }
+
+    // Maquina
+
+});
