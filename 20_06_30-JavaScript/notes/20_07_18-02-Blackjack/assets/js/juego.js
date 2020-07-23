@@ -8,7 +8,7 @@
 let deck = []; //Este arreglo inicia vacio
 const tipos = ['C', 'D', 'H', 'S']; //Estos son los tipos de cartas
 const especiales = ['A', 'J', 'Q', 'K', 'A', 'J', 'Q', 'K', 'A', 'J', 'Q', 'K', 'A', 'J', 'Q', 'K']; // Estas son las cartas especiales que se van a crear
-const numeros = [2, 3, 4, 5, 6, 7, 8, 9, 10, 2, 3, 4, 5, 6, 7, 8, 9, 10, 2, 3, 4, 5, 6, 7, 8, 9, 10, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const numeros = [2, 3, 4, 5, 6, 7, 8, 9, 10 /*, 2, 3, 4, 5, 6, 7, 8, 9, 10, 2, 3, 4, 5, 6, 7, 8, 9, 10, 2, 3, 4, 5, 6, 7, 8, 9, 10*/ ];
 
 let puntosJugador = 0,
     puntosComputadora = 0; // Estos puntos son let, porque van a cambiar segun las cartas del jugador
@@ -66,10 +66,10 @@ const pedirCarta = () => { //Aqui creamos la funcion pedirCarta, para que mande 
 
     const carta = deck.pop() //Remueve el ultimo elemento del arreglo y lo regresa
         // console.log(carta); // Aqui vemos que la carta ya fue removida del Deck por el Pop anterior
+        // console.log(deck); //Aqio vemos como quedo el Deck despues del .pop
     return carta; //Aqui manda la carta que sacamos
 }
 
-// pedirCarta();
 const valorCarta = (carta) => { // valorCarta va a recibir el valor de la carta - Pero esto es para convertir el String de la carta en un valor
 
     // console.log(carta); // Aqui veo que carta es
@@ -81,24 +81,24 @@ const valorCarta = (carta) => { // valorCarta va a recibir el valor de la carta 
 }
 
 // Turno de la computadora
-const turnoComputadora = (puntosMinimos) => {
-    do {
-        const carta = pedirCarta();
+const turnoComputadora = (puntosMinimos) => { //El turno de la computadora ya lleva guardados los puntosJugador.
+    do { //El turnoComputadora fue llamado en una parte del codigo, asi que..
+        const cartaPedirComputadora = pedirCarta(); //Aqui esta el valor de la carta, va a ejecutar la sentencia de pedirCarta con todo y Pop
 
-        puntosComputadora = puntosComputadora + valorCarta(carta);
-        puntosHTML[1].innerText = puntosComputadora;
+        puntosComputadora = puntosComputadora + valorCarta(cartaPedirComputadora); //Aqui se suman los puntos de cada carga
+        puntosHTML[1].innerText = puntosComputadora; //Aqui se agregan al DOM
 
         // <!-- <img class="carta" src="assets/cartas/2S.png" alt="" srcset=""> -->
-        const imgCarta = document.createElement('img');
-        imgCarta.src = `assets/cartas/${carta}.png`; //3H, JD`
-        imgCarta.classList.add('carta'); // Agrega caracteristicas o clases al DOM
-        divCartasComputadora.append(imgCarta); //apend pone en el DOM un elemento al final - (prepend inicio)
+        const imgCarta = document.createElement('img'); // Creo una constante que sea una imagen
+        imgCarta.src = `assets/cartas/${cartaPedirComputadora}.png`; // Selecciona la imagen a agregar
+        imgCarta.classList.add('carta'); // Agrega las caracteristicas de la clase al DOM
+        divCartasComputadora.append(imgCarta); // Pone en el DOM un elemento al final - append (prepend inicio)
 
-        if (puntosMinimos > 21) {
-            break;
+        if (puntosMinimos > 21) { //Pero si los puntos minimos son mas de 21 
+            break; //rompete
         }
 
-    } while ((puntosComputadora < puntosMinimos) && (puntosMinimos <= 21));
+    } while ((puntosComputadora < puntosMinimos) && (puntosMinimos <= 21)); //mientras los puntos computadora sean menores que los puntosJugador y los puntosMinimos sean menores a 21
 
     setTimeout(() => {
 
@@ -116,14 +116,14 @@ const turnoComputadora = (puntosMinimos) => {
 
 // Eventos - ¡¡AYUDA!!
 btnPedir.addEventListener('click', () => { //Aqui agregamos el evento click, para que mande la funcion que esta escrita ("Callback" - Esta es una funcion de flecha)
-    const carta = pedirCarta(); //la funcion carta, toma la funcion de pedir carta
+    const cartaPedir = pedirCarta(); //la funcion carta, toma la funcion de pedir carta
 
-    puntosJugador = puntosJugador + valorCarta(carta); //valorCarta convierte en valor en un Number
+    puntosJugador = puntosJugador + valorCarta(cartaPedir); //valorCarta convierte en valor en un Number
     puntosHTML[0].innerText = puntosJugador; // Aqui agregamos info al <small>=definido en el HTML
 
     // <!-- <img class="carta" src="assets/cartas/2S.png" alt="" srcset=""> -->
     const imgCarta = document.createElement('img'); //Esto crea la imagen al pedirla
-    imgCarta.src = `assets/cartas/${carta}.png`; //Aqui agregamos la carta que salga
+    imgCarta.src = `assets/cartas/${cartaPedir}.png`; //Aqui agregamos la carta que salga
     imgCarta.classList.add('carta'); //Aqui la agregamos la clase para que la tome cuando salga en el DOM
     divCartasJugador.append(imgCarta); //Mostramos la carta en el DOM
 
@@ -149,7 +149,7 @@ btnDetener.addEventListener('click', () => {
 
 btnNuevo.addEventListener('click', () => {
     console.clear();
-    decl = [];
+    deck = [];
     deck = crearDeck();
 
     puntosJugador = 0;
