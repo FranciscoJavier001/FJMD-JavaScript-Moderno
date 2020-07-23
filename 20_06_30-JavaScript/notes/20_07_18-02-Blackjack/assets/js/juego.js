@@ -7,13 +7,14 @@
 // Declaramos las variables
 let deck = []; //Este arreglo inicia vacio
 const tipos = ['C', 'D', 'H', 'S']; //Estos son los tipos de cartas
-const especiales = ['A', 'J', 'Q', 'K', 'A', 'J', 'Q', 'K', 'A', 'J', 'Q', 'K', 'A', 'J', 'Q', 'K']; // Estas son las cartas especiales que se van acreat
+const especiales = ['A', 'J', 'Q', 'K', 'A', 'J', 'Q', 'K', 'A', 'J', 'Q', 'K', 'A', 'J', 'Q', 'K']; // Estas son las cartas especiales que se van a crear
 const numeros = [2, 3, 4, 5, 6, 7, 8, 9, 10, 2, 3, 4, 5, 6, 7, 8, 9, 10, 2, 3, 4, 5, 6, 7, 8, 9, 10, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 let puntosJugador = 0,
     puntosComputadora = 0; // Estos puntos son let, porque van a cambiar segun las cartas del jugador
 
 // Referencias del HTML
+// Aqui los declaramos para acceder mas rapido a ellos
 const btnPedir = document.querySelector('#btnPedir');
 const btnDetener = document.querySelector('#btnDetener');
 const btnNuevo = document.querySelector('#btnNuevo');
@@ -56,7 +57,7 @@ const crearDeck = () => { // Funcion que no necesita ningun argumento
 crearDeck(); // Aqui la llaman
 
 // Esta funcion me permite tomar una carta
-const pedirCarta = () => {
+const pedirCarta = () => { //Aqui creamos la funcion pedirCarta, para que mande la funcion que esta escrita ("Callback" - Esta es una funcion de flecha)
 
     // Aqui nos aventamos un error, en caso que no hubiera mas cartas, es una medida de seguridad
     if (deck.length === 0) {
@@ -65,7 +66,7 @@ const pedirCarta = () => {
 
     const carta = deck.pop() //Remueve el ultimo elemento del arreglo y lo regresa
         // console.log(carta); // Aqui vemos que la carta ya fue removida del Deck por el Pop anterior
-    return carta;
+    return carta; //Aqui manda la carta que sacamos
 }
 
 // pedirCarta();
@@ -90,8 +91,8 @@ const turnoComputadora = (puntosMinimos) => {
         // <!-- <img class="carta" src="assets/cartas/2S.png" alt="" srcset=""> -->
         const imgCarta = document.createElement('img');
         imgCarta.src = `assets/cartas/${carta}.png`; //3H, JD`
-        imgCarta.classList.add('carta');
-        divCartasComputadora.append(imgCarta);
+        imgCarta.classList.add('carta'); // Agrega caracteristicas o clases al DOM
+        divCartasComputadora.append(imgCarta); //apend pone en el DOM un elemento al final - (prepend inicio)
 
         if (puntosMinimos > 21) {
             break;
@@ -113,38 +114,37 @@ const turnoComputadora = (puntosMinimos) => {
     }, 100);
 }
 
-// Eventos
-btnPedir.addEventListener('click', () => {
-    const carta = pedirCarta();
+// Eventos - ¡¡AYUDA!!
+btnPedir.addEventListener('click', () => { //Aqui agregamos el evento click, para que mande la funcion que esta escrita ("Callback" - Esta es una funcion de flecha)
+    const carta = pedirCarta(); //la funcion carta, toma la funcion de pedir carta
 
-    puntosJugador = puntosJugador + valorCarta(carta);
-    puntosHTML[0].innerText = puntosJugador;
+    puntosJugador = puntosJugador + valorCarta(carta); //valorCarta convierte en valor en un Number
+    puntosHTML[0].innerText = puntosJugador; // Aqui agregamos info al <small>=definido en el HTML
 
     // <!-- <img class="carta" src="assets/cartas/2S.png" alt="" srcset=""> -->
-    const imgCarta = document.createElement('img');
-    imgCarta.src = `assets/cartas/${carta}.png`; //3H, JD
-    imgCarta.classList.add('carta');
-    divCartasJugador.append(imgCarta);
+    const imgCarta = document.createElement('img'); //Esto crea la imagen al pedirla
+    imgCarta.src = `assets/cartas/${carta}.png`; //Aqui agregamos la carta que salga
+    imgCarta.classList.add('carta'); //Aqui la agregamos la clase para que la tome cuando salga en el DOM
+    divCartasJugador.append(imgCarta); //Mostramos la carta en el DOM
 
-    if (puntosJugador > 21) {
+    if (puntosJugador > 21) { // Te pasaste de 21
         console.warn('Lo siento mucho, perdiste');
-        btnPedir.disabled = true;
-        btnDetener.disabled = true;
-        turnoComputadora(puntosJugador);
+        btnPedir.disabled = true; //Desactivamos Botones
+        btnDetener.disabled = true; //Desactivamos Botones
+        turnoComputadora(puntosJugador); //Se lanza el turno de la computadora
 
     } else if (puntosJugador === 21) {
         console.warn('21, Genial!');
-        btnPedir.disabled = true;
-        btnDetener.disabled = true;
-        turnoComputadora(puntosJugador);
+        btnPedir.disabled = true; //Desactivamos Botones
+        btnDetener.disabled = true; //Desactivamos Botones
+        turnoComputadora(puntosJugador); //Se lanza el turno de la computadora
     }
 });
 
 btnDetener.addEventListener('click', () => {
-    btnPedir.disabled = true;
-    btnDetener.disabled = true;
-
-    turnoComputadora(puntosJugador);
+    btnPedir.disabled = true; //Desactivamos Botones
+    btnDetener.disabled = true; //Desactivamos Botones
+    turnoComputadora(puntosJugador); //Se lanza el turno de la computadora
 });
 
 btnNuevo.addEventListener('click', () => {
