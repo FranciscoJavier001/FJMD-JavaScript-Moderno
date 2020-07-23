@@ -10,8 +10,12 @@ body {
     background-color: black;
     color: white;
     padding: 20px;
+    /* Esto es lo negro, bueno el tamaño de arriba abajo*/
     font-size: 25px;
 }
+
+
+/* Se hizo una clase llamada "carta" en la cual se acomodo el estilo */
 
 .carta {
     position: relative;

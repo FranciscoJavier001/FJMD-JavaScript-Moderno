@@ -1,9 +1,8 @@
-/**
- * 2C = Two of Clubs (Treboles)
- * 2D = Two of Diamonds (Diamantes)
- * 2H = Two of Hearts (Corazones)
- * 2S = Two of Spades (Espadas)
- */
+// Patron Modulo
+(() => {
+    const personajes = ['Ana', 'Mercy', 'Mei'];
+    console.log(personajes);
+})();
 
 let deck = [];
 const tipos = ['C', 'D', 'H', 'S'];
@@ -38,7 +37,6 @@ const crearDeck = () => {
     }
     // console.log(deck);
     deck = _.shuffle(deck);
-    console.log(deck);
     return deck;
 }
 
