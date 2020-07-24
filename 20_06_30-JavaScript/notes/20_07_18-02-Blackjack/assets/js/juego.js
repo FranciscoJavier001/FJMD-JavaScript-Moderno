@@ -7,38 +7,40 @@
 // Declaramos las variables
 let deck = []; //Este arreglo inicia vacio
 const tipos = ['C', 'D', 'H', 'S']; //Estos son los tipos de cartas
-const especiales = ['A', 'J', 'Q', 'K', 'A', 'J', 'Q', 'K', 'A', 'J', 'Q', 'K', 'A', 'J', 'Q', 'K']; // Estas son las cartas especiales que se van a crear
-const numeros = [2, 3, 4, 5, 6, 7, 8, 9, 10 /*, 2, 3, 4, 5, 6, 7, 8, 9, 10, 2, 3, 4, 5, 6, 7, 8, 9, 10, 2, 3, 4, 5, 6, 7, 8, 9, 10*/ ];
+const especiales = ['A', 'J', 'Q', 'K' /*, 'A', 'J', 'Q', 'K', 'A', 'J', 'Q', 'K', 'A', 'J', 'Q', 'K'*/ ]; // Estas son las cartas especiales que se van a crear
 
-let puntosJugador = 0,
-    puntosComputadora = 0; // Estos puntos son let, porque van a cambiar segun las cartas del jugador
+// En caso que use mi referencia
+// const numeros = [2, 3, 4, 5, 6, 7, 8, 9, 10 /*, 2, 3, 4, 5, 6, 7, 8, 9, 10, 2, 3, 4, 5, 6, 7, 8, 9, 10, 2, 3, 4, 5, 6, 7, 8, 9, 10*/ ];
+
+let puntosJugador = 0, // Estos puntos son let, porque van a cambiar segun las cartas del jugador/maquina
+    puntosComputadora = 0; // Estos puntos son let, porque van a cambiar segun las cartas del jugador/maquina
 
 // Referencias del HTML
 // Aqui los declaramos para acceder mas rapido a ellos
-const btnPedir = document.querySelector('#btnPedir');
-const btnDetener = document.querySelector('#btnDetener');
-const btnNuevo = document.querySelector('#btnNuevo');
+const btnPedir = document.querySelector('#btnPedir'); // Referencia al boton Pedir
+const btnDetener = document.querySelector('#btnDetener'); // Referencia al boton Detener
+const btnNuevo = document.querySelector('#btnNuevo'); // Referencia al boton Nuevo
 
-const divCartasJugador = document.querySelector('#jugador-cartas');
-const divCartasComputadora = document.querySelector('#computadora-cartas');
+const divCartasJugador = document.querySelector('#jugador-cartas'); //En CSS hicimos un espacio y aqui se ponen las cartas
+const divCartasComputadora = document.querySelector('#computadora-cartas'); //En CSS hicimos un espacio y aqui se ponen las cartas
 
-const puntosHTML = document.querySelectorAll('small');
+const puntosHTML = document.querySelectorAll('small'); //Es el numero chiquito que va aumentando segun tus cartas
 
 // Esta funcion crea un nuevo deck
 const crearDeck = () => { // Funcion que no necesita ningun argumento
 
     // "Esta fue la formula original, pero la sustitui por la mia"
-    // for (let i = 2; i <= 10; i++) { // Ciclo For
-    //     for (let tipo of tipos) { // Tenemos escrito tipos porque son los que se van a crear
-    //         deck.push(i + tipo); // Este push significa que se van a añadir las cartas del tipo
-    //     }
-    // }
-
-    for (let tipo of tipos) { // Aqui creo los tipos de las extenciones de las cartas
-        for (num of numeros) { // Aqui creo un nuevo array que conlleva todos los numeros de 4 barajas
-            deck.push(num + tipo) // Aqui los agrego a la baraja.
+    for (let i = 2; i <= 10; i++) { // Ciclo For
+        for (let tipo of tipos) { // Tenemos escrito tipos porque son los que se van a crear
+            deck.push(i + tipo); // Este push significa que se van a añadir las cartas del tipo
         }
     }
+
+    // for (let tipo of tipos) { // Aqui creo los tipos de las extenciones de las cartas
+    //     for (num of numeros) { // Aqui creo un nuevo array que conlleva todos los numeros de 4 barajas
+    //         deck.push(num + tipo) // Aqui los agrego a la baraja.
+    //     }
+    // }
 
     for (let tipo of tipos) { // Aqui creamos los tipos de cartas - Corazon, Espadas, Diamantes, Treboles
         for (let esp of especiales) { // Tenemos escrito especiales porque son los que se van a crear- A, K, Q, J
@@ -100,9 +102,9 @@ const turnoComputadora = (puntosMinimos) => { //El turno de la computadora ya ll
 
     } while ((puntosComputadora < puntosMinimos) && (puntosMinimos <= 21)); //mientras los puntos computadora sean menores que los puntosJugador y los puntosMinimos sean menores a 21
 
-    setTimeout(() => {
+    setTimeout(() => { //En los milosegundos va una funcion vacia que se pasa como parametro que va a hacer estas instrucciones
 
-        if (puntosComputadora === puntosMinimos) {
+        if (puntosComputadora === puntosMinimos) { // Condiciones de quien gana
             alert('Nadie Gana =(');
         } else if (puntosMinimos > 21) {
             alert('Computadora Gana =)');
@@ -111,7 +113,7 @@ const turnoComputadora = (puntosMinimos) => { //El turno de la computadora ya ll
         } else {
             alert('Computadora Gana =)');
         }
-    }, 100);
+    }, 100); // Son los milisegundos que se van a lanzar
 }
 
 // Eventos - ¡¡AYUDA!!
@@ -131,36 +133,36 @@ btnPedir.addEventListener('click', () => { //Aqui agregamos el evento click, par
         console.warn('Lo siento mucho, perdiste');
         btnPedir.disabled = true; //Desactivamos Botones
         btnDetener.disabled = true; //Desactivamos Botones
-        turnoComputadora(puntosJugador); //Se lanza el turno de la computadora
+        turnoComputadora(puntosJugador); //Se lanza el turno de la computadora pero guardando los puntosJugador
 
     } else if (puntosJugador === 21) {
         console.warn('21, Genial!');
         btnPedir.disabled = true; //Desactivamos Botones
         btnDetener.disabled = true; //Desactivamos Botones
-        turnoComputadora(puntosJugador); //Se lanza el turno de la computadora
+        turnoComputadora(puntosJugador); //Se lanza el turno de la computadora pero guardando los puntosJugador
     }
 });
 
-btnDetener.addEventListener('click', () => {
+btnDetener.addEventListener('click', () => { // Que pasa cuando pulso detener
     btnPedir.disabled = true; //Desactivamos Botones
     btnDetener.disabled = true; //Desactivamos Botones
-    turnoComputadora(puntosJugador); //Se lanza el turno de la computadora
+    turnoComputadora(puntosJugador); //Se lanza el turno de la computadora (Esta es la que guarda el puntaje del puntosJugador)
 });
 
-btnNuevo.addEventListener('click', () => {
-    console.clear();
-    deck = [];
-    deck = crearDeck();
+btnNuevo.addEventListener('click', () => { // Creamos una funcion cuando se de click al boton nuevo 
+    console.clear(); // Limpiamos la consola
+    deck = []; // Se vacia el Deck
+    deck = crearDeck(); // Se crea un nuevo Deck
 
-    puntosJugador = 0;
-    puntosComputadora = 0;
+    puntosJugador = 0; //Reiniciamos los puntajes
+    puntosComputadora = 0; //Reiniciamos los puntajes
 
-    puntosHTML[0].innerText = 0;
-    puntosHTML[1].innerText = 0;
+    puntosHTML[0].innerText = 0; //Reiniciamos los puntajes
+    puntosHTML[1].innerText = 0; //Reiniciamos los puntajes
 
-    divCartasComputadora.innerHTML = '';
-    divCartasJugador.innerHTML = '';
+    divCartasComputadora.innerHTML = ''; //Se quedan limpias las cartas
+    divCartasJugador.innerHTML = ''; //Se quedan limpias las cartas
 
-    btnPedir.disabled = false;
-    btnDetener.disabled = false;
+    btnPedir.disabled = false; // Desactivamos los botones
+    btnDetener.disabled = false; // Desactivamos los botones
 });
