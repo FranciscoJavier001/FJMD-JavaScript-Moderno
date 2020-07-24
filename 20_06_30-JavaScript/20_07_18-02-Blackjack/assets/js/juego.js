@@ -2,6 +2,7 @@ const miModulo = (() => { // Esta es una funcion anonima autoinvocada
     'use strict'; // Se estricto a la hora de evaluar mi codigo y aumenta mi seguridad
 
     let deck = [];
+
     const tipos = ['C', 'D', 'H', 'S'],
         especiales = ['A', 'J', 'Q', 'K'];
 
@@ -15,9 +16,9 @@ const miModulo = (() => { // Esta es una funcion anonima autoinvocada
     const divCartasJugadores = document.querySelectorAll('.divCartas'),
         puntosHTML = document.querySelectorAll('small');
 
-
     // Esta funcion inicializa el juego
     const inicializarJuego = (numJugadores = 2) => {
+
         deck = crearDeck();
 
         puntosJugadores = [];
@@ -30,13 +31,13 @@ const miModulo = (() => { // Esta es una funcion anonima autoinvocada
 
         btnPedir.disabled = false;
         btnDetener.disabled = false;
-
     }
 
     // Esta funcion crea un nuevo deck
     const crearDeck = () => {
 
         deck = [];
+
         for (let i = 2; i <= 10; i++) {
             for (let tipo of tipos) {
                 deck.push(i + tipo);
@@ -54,14 +55,18 @@ const miModulo = (() => { // Esta es una funcion anonima autoinvocada
 
     // Esta funcion me permite tomar una carta
     const pedirCarta = () => {
+
         if (deck.length === 0) {
             throw 'No hay cartas en el deck';
         }
+
         return deck.pop();
     }
 
     const valorCarta = (carta) => { // Esta funcion sirve para obtener el valor de la carta
+
         const valor = carta.substring(0, carta.length - 1);
+
         return (isNaN(valor)) ?
             (valor === 'A') ? 11 : 10 :
             valor * 1;
@@ -69,8 +74,10 @@ const miModulo = (() => { // Esta es una funcion anonima autoinvocada
 
     // Turno: 0 = primer jugador y el ultimo sera la computadora
     const acumularPuntos = (carta, turno) => {
+
         puntosJugadores[turno] = puntosJugadores[turno] + valorCarta(carta);
         puntosHTML[turno].innerText = puntosJugadores[turno];
+
         return puntosJugadores[turno];
     }
 
@@ -80,7 +87,6 @@ const miModulo = (() => { // Esta es una funcion anonima autoinvocada
         imgCarta.src = `assets/cartas/${carta}.png`; //3H, JD`
         imgCarta.classList.add('carta');
         divCartasJugadores[turno].append(imgCarta)
-
     }
 
     const determinarGanador = () => {
@@ -98,7 +104,6 @@ const miModulo = (() => { // Esta es una funcion anonima autoinvocada
                 alert('Computadora Gana =)');
             }
         }, 100);
-
     }
 
     // Turno de la computadora
@@ -124,7 +129,6 @@ const miModulo = (() => { // Esta es una funcion anonima autoinvocada
 
         crearCarta(carta, 0);
 
-
         if (puntosJugador > 21) {
             console.warn('Lo siento mucho, perdiste');
             btnPedir.disabled = true;
@@ -137,10 +141,10 @@ const miModulo = (() => { // Esta es una funcion anonima autoinvocada
             btnDetener.disabled = true;
             turnoComputadora(puntosJugador);
         }
-
     });
 
     btnDetener.addEventListener('click', () => {
+
         btnPedir.disabled = true;
         btnDetener.disabled = true;
 
