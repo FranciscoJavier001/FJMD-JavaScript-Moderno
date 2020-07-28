@@ -1,11 +1,19 @@
 {
-  "name": "webpack-inicial",
-  "version": "1.0.0",
-  "description": "Este es un casaron de un proyecto de webpack",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Francisco Javier Martinez Duran",
-  "license": "ISC"
+    "name": "webpack-inicial",
+    "version": "1.0.0",
+    "description": "Este es un casaron de un proyecto de webpack",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "webpack"
+    },
+    "author": "Francisco Javier Martinez Duran",
+    "license": "ISC",
+    "devDependencies": {
+        "html-loader": "^1.1.0",
+        "html-webpack-plugin": "^4.3.0",
+        "webpack": "^4.44.0",
+        "webpack-cli": "^3.3.12",
+        "webpack-dev-server": "^3.11.0"
+    }
 }
