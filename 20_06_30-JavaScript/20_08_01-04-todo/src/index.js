@@ -20,4 +20,3 @@ export const todoList = new TodoList();
 // }, 1500)
 
 todoList.todos.forEach(crearTodoHtml); // Mandamos llamar este procedimiento para ver los Todos
-//  Escuadron
