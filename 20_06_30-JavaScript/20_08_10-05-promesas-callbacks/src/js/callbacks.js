@@ -9,7 +9,18 @@ const heroes = {
     },
     spider: { // Esto es un objeto
         nombre: 'Spiderman',
-        poder: 'La mejor rwaccion alergica a las picadiras de arañas'
+        poder: 'La mejor reaccion alergica a las picaduras de arañas'
     },
 }
 
+// callback retorna...
+export const buscarHeroe = (id, callback) => {
+    const heroe = heroes[id];
+    if(heroe){
+        callback(null, heroe);
+    }else{
+        // Un error
+        callback(`No existe un heroe con el id ${id}`);
+    }
+    // callback(heroe);
+}

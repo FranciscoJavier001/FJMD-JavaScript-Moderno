@@ -1,8 +1,12 @@
-
+import {buscarHeroe} from './js/callbacks';
 import './styles.css';
 
-const heroeId = 'capi'; // Este es el primer argumento, y el segundo argumento es una funcion conocida como vallback
+const heroeId = 'capi2'; // Este es el primer argumento, y el segundo argumento es una funcion conocida como callback
 
-buscarHeroe(heroeId, () => { // Esto manda una funcion como argumento
-    console.log('Callback llamado!');
+buscarHeroe(heroeId, (err, heroe) => { // Esto manda una funcion como argumento
+    if(err){
+        console.error(err);
+    } else {
+        console.info(heroe);
+    }
 }); 
