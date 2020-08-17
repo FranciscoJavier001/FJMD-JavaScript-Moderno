@@ -10,3 +10,5 @@ buscarHeroe(heroeId, (err, heroe) => { // Esto manda una funcion como argumento
         console.info(heroe);
     }
 }); 
+8heroeId
+eliminarHeroe
