@@ -1,4 +1,9 @@
+import {promesaLenta, promesaMedia, promesaRapida} from './js/promesas';
 
-import './styles.css';
+// promesaLenta.then(console.log);
+// promesaMedia.then(console.log);
+// promesaRapida.then(console.log);
 
-// Aprendiendo SAP
+Promise.race([promesaLenta, promesaMedia, promesaRapida])
+.then(console.log)
+.catch(console.warn);
