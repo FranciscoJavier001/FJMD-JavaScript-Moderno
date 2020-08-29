@@ -29,6 +29,7 @@ export const buscarHeroe = (id) => {
 export const buscarHeroeAsync = async(id) => {
 
     const heroe = heroes[id];
+
     if(heroe){
         return heroe;
     } else {
