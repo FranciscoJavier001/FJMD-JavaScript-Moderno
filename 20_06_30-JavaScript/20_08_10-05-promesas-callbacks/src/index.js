@@ -1,1 +1,1 @@
-weed
+bad day
